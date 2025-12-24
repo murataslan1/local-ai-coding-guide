@@ -1,0 +1,26 @@
+{
+    "models": [
+        {
+            "title": "Qwen 2.5 Coder 32B",
+            "provider": "ollama",
+            "model": "qwen2.5-coder:32b",
+            "contextLength": 32768
+        },
+        {
+            "title": "DeepSeek R1 32B",
+            "provider": "ollama",
+            "model": "deepseek-r1:32b",
+            "contextLength": 32768
+        }
+    ],
+    "tabAutocompleteModel": {
+        "title": "Qwen 1.5B (Fast Autocomplete)",
+        "provider": "ollama",
+        "model": "qwen2.5-coder:1.5b-base"
+    },
+    "tabAutocompleteOptions": {
+        "debounceDelay": 300,
+        "multilineCompletions": "always"
+    },
+    "allowAnonymousTelemetry": false
+}
