@@ -49,6 +49,7 @@
 - [Prompt Engineering](#-prompt-engineering) - Better local prompts
 - [Real-World Workflows](#-real-world-workflows)
 - [Community Experiences](#-community-experiences) - Reddit/HN insights
+- [Advanced Patterns](#-advanced-patterns) - Architect-Builder, YOLO Mode
 
 ### ⚠️ Troubleshooting
 - [Gotchas & Common Mistakes](#️-gotchas)
