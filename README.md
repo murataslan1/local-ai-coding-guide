@@ -52,9 +52,16 @@
 - [Advanced Patterns](#-advanced-patterns) - Architect-Builder, YOLO Mode
 
 ### ⚠️ Troubleshooting
+- [FAQ](#-faq) - Quick answers
 - [Gotchas & Common Mistakes](#️-gotchas)
+- [Diagrams](#-diagrams) - Visual workflows
 - [Optimization Guide](#-optimization-guide)
 - [Cost Analysis](#-cost-analysis)
+
+### 🛠️ Tools & Configs
+- [Docker Compose](#-docker-compose) - One-command setup
+- [Config Templates](#-config-templates) - Ready-to-use configs
+- [Benchmark Script](#-benchmark-script) - Test your hardware
 
 </details>
 

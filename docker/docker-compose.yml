@@ -1,0 +1,121 @@
+# Local AI Coding Stack - Docker Compose
+# One command to rule them all!
+#
+# Usage:
+#   docker compose up -d        # Start all services
+#   docker compose logs -f      # View logs
+#   docker compose down         # Stop all services
+#
+# Services:
+#   - Ollama: Main LLM inference (port 11434)
+#   - Tabby: Code autocomplete (port 5000)
+#   - Open WebUI: Chat interface (port 3000)
+
+version: '3.8'
+
+services:
+  # ============================================
+  # OLLAMA - Main LLM Inference Server
+  # ============================================
+  ollama:
+    image: ollama/ollama:latest
+    container_name: ollama
+    restart: unless-stopped
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama_data:/root/.ollama
+    environment:
+      - OLLAMA_HOST=0.0.0.0
+      - OLLAMA_KEEP_ALIVE=-1  # Never unload models
+      - OLLAMA_NUM_PARALLEL=2   # Parallel requests
+    # GPU Support (uncomment for NVIDIA)
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:11434/api/tags"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # ============================================
+  # MODEL LOADER - Pull models on startup
+  # ============================================
+  model-loader:
+    image: ollama/ollama:latest
+    container_name: model-loader
+    depends_on:
+      ollama:
+        condition: service_healthy
+    entrypoint: ["/bin/sh", "-c"]
+    command:
+      - |
+        echo "Pulling coding models..."
+        ollama pull qwen2.5-coder:32b-instruct-q8_0
+        ollama pull qwen2.5-coder:1.5b-base
+        ollama pull nomic-embed-text
+        echo "Models ready!"
+    environment:
+      - OLLAMA_HOST=ollama:11434
+    restart: "no"
+
+  # ============================================
+  # TABBY - Code Autocomplete Server
+  # ============================================
+  tabby:
+    image: tabbyml/tabby:latest
+    container_name: tabby
+    restart: unless-stopped
+    ports:
+      - "5000:5000"
+    volumes:
+      - tabby_data:/data
+    command: serve --model StarCoder2-3B --device cuda
+    # GPU Support (uncomment for NVIDIA)
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5000/v1/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # ============================================
+  # OPEN WEBUI - Chat Interface
+  # ============================================
+  open-webui:
+    image: ghcr.io/open-webui/open-webui:main
+    container_name: open-webui
+    restart: unless-stopped
+    ports:
+      - "3000:8080"
+    volumes:
+      - openwebui_data:/app/backend/data
+    environment:
+      - OLLAMA_BASE_URL=http://ollama:11434
+      - WEBUI_AUTH=false  # Set to true for auth
+    depends_on:
+      ollama:
+        condition: service_healthy
+
+volumes:
+  ollama_data:
+    driver: local
+  tabby_data:
+    driver: local
+  openwebui_data:
+    driver: local
+
+networks:
+  default:
+    name: local-ai-network

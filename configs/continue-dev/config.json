@@ -1,0 +1,106 @@
+{
+  "$schema": "https://continue.dev/config-schema.json",
+  "models": [
+    {
+      "title": "Qwen 32B (Main)",
+      "provider": "ollama",
+      "model": "qwen2.5-coder:32b-instruct-q8_0",
+      "contextLength": 32768,
+      "completionOptions": {
+        "temperature": 0.2,
+        "top_p": 0.9,
+        "maxTokens": 4096
+      },
+      "systemMessage": "You are Qwen, a highly capable coding assistant created by Alibaba Cloud. You are an expert in algorithms, system design, and clean code principles. You strictly adhere to user constraints and always think step-by-step before generating code."
+    },
+    {
+      "title": "DeepSeek R1 (Reasoning)",
+      "provider": "ollama",
+      "model": "deepseek-r1:32b",
+      "contextLength": 32768,
+      "completionOptions": {
+        "temperature": 0.1,
+        "maxTokens": 8192
+      },
+      "systemMessage": "You are a helpful coding assistant. Think step by step before answering. Always plan before implementing."
+    }
+  ],
+  "tabAutocompleteModel": {
+    "title": "Qwen 1.5B (Fast Autocomplete)",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:1.5b-base",
+    "contextLength": 8192,
+    "completionOptions": {
+      "temperature": 0.0,
+      "maxTokens": 256
+    }
+  },
+  "embeddingsProvider": {
+    "provider": "ollama",
+    "model": "nomic-embed-text"
+  },
+  "customCommands": [
+    {
+      "name": "test",
+      "description": "Generate unit tests for selected code",
+      "prompt": "Write comprehensive unit tests for the following code. Use the project's existing test framework. Include edge cases and error scenarios.\n\n{{{ input }}}"
+    },
+    {
+      "name": "refactor",
+      "description": "Refactor selected code",
+      "prompt": "Refactor the following code to be more readable and maintainable. Keep the same functionality. Explain what you changed and why.\n\n{{{ input }}}"
+    },
+    {
+      "name": "debug",
+      "description": "Debug and fix issues",
+      "prompt": "Analyze the following code for bugs, issues, and potential improvements. If you find problems, provide a fixed version with explanations.\n\n{{{ input }}}"
+    },
+    {
+      "name": "doc",
+      "description": "Generate documentation",
+      "prompt": "Generate comprehensive docstrings/documentation for the following code. Use the appropriate format for the language (e.g., JSDoc, docstrings, etc.).\n\n{{{ input }}}"
+    }
+  ],
+  "contextProviders": [
+    {
+      "name": "code",
+      "params": {}
+    },
+    {
+      "name": "terminal",
+      "params": {}
+    },
+    {
+      "name": "codebase",
+      "params": {
+        "nRetrieve": 25,
+        "nFinal": 5,
+        "useReranking": true
+      }
+    },
+    {
+      "name": "folder",
+      "params": {}
+    }
+  ],
+  "slashCommands": [
+    {
+      "name": "edit",
+      "description": "Edit selected code"
+    },
+    {
+      "name": "comment",
+      "description": "Add comments to code"
+    },
+    {
+      "name": "share",
+      "description": "Export conversation"
+    }
+  ],
+  "allowAnonymousTelemetry": false,
+  "ui": {
+    "codeBlockToolbarPosition": "top",
+    "fontSize": 14,
+    "displayRawMarkdown": false
+  }
+}

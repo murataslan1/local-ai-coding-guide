@@ -1,0 +1,42 @@
+# Aider Configuration for Local AI Coding
+# Copy to ~/.aider.conf.yml or project root
+
+# Model Configuration
+model: ollama/qwen2.5-coder:32b-instruct-q8_0
+weak-model: ollama/qwen2.5-coder:7b-instruct-q8_0
+
+# API Configuration (for Ollama)
+openai-api-base: http://localhost:11434/v1
+openai-api-key: "ollama"
+
+# Git Integration
+auto-commits: true
+commit-prompt: "conventional"
+attribute-author: true
+attribute-committer: true
+dirty-commits: true
+
+# Editor Settings
+edit-format: diff
+stream: true
+pretty: true
+dark-mode: true
+
+# Context Settings
+map-tokens: 2048
+map-refresh: auto
+max-chat-history-tokens: 8192
+
+# Safety
+auto-test: false
+test-cmd: ""
+lint: true
+lint-cmd: ""
+
+# Performance
+check-update: false
+cache: true
+
+# Advanced
+no-suggest-shell-commands: false
+restore-chat-history: true
