@@ -1,43 +1,83 @@
+<div align="center">
+
+<img src="assets/banner.png" alt="Local AI Coding Guide Banner" width="100%">
+
 # 🦙 Local AI Coding Guide
 
-> **Run GPT-4 class AI coding assistants 100% locally. No API costs. No cloud. Total privacy.**
+**Run GPT-4 class AI coding assistants 100% locally. No API costs. No cloud. Total privacy.**
 
-[![Stars](https://img.shields.io/github/stars/murataslan1/local-ai-coding-guide?style=social)](https://github.com/murataslan1/local-ai-coding-guide)
-[![Last Updated](https://img.shields.io/badge/Updated-December%202025-brightgreen)](https://github.com/murataslan1/local-ai-coding-guide)
-[![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![GitHub stars](https://img.shields.io/github/stars/murataslan1/local-ai-coding-guide?style=for-the-badge&logo=github&color=yellow)](https://github.com/murataslan1/local-ai-coding-guide/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/murataslan1/local-ai-coding-guide?style=for-the-badge&logo=github&color=blue)](https://github.com/murataslan1/local-ai-coding-guide/network/members)
+[![Last Updated](https://img.shields.io/badge/Updated-January%202026-brightgreen?style=for-the-badge)](https://github.com/murataslan1/local-ai-coding-guide)
 
-<p align="center">
-  <img src="https://img.shields.io/badge/Qwen%202.5%20Coder-32B-orange?style=for-the-badge&logo=alibabacloud"/>
-  <img src="https://img.shields.io/badge/Ollama-Ready-success?style=for-the-badge&logo=ollama"/>
-  <img src="https://img.shields.io/badge/100%25-Offline-blue?style=for-the-badge"/>
-</p>
+[![Qwen](https://img.shields.io/badge/Qwen%202.5%20Coder-32B-orange?style=for-the-badge&logo=alibabacloud)](https://huggingface.co/Qwen/Qwen2.5-Coder-32B-Instruct)
+[![Ollama](https://img.shields.io/badge/Ollama-Ready-success?style=for-the-badge)](https://ollama.com)
+[![Privacy](https://img.shields.io/badge/100%25-Offline-blue?style=for-the-badge)](https://github.com/murataslan1/local-ai-coding-guide)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge)](LICENSE)
+
+*Complete guide with agentic workflows, prompt engineering, runner comparison, and real-world examples*
+
+<br>
+
+**⚡ Quick Links:**
+
+[🚀 Quick Start](#-quick-start) · [🤖 Agentic Coding](#-agentic-coding-new) · [🔀 Runners](#-runner-comparison) · [🛡️ Guardrails](#️-guardrails--coding-plans) · [🎯 Prompts](#-prompt-engineering) · [⚠️ Gotchas](#️-gotchas)
+
+</div>
 
 ---
 
-## 📖 Table of Contents
+## 📋 Table of Contents
 
+<details>
+<summary><b>Click to expand full navigation</b></summary>
+
+### 🚀 Getting Started
 - [Why Local AI?](#-why-local-ai)
-- [Quick Start (5 minutes)](#-quick-start)
-- [Model Comparison](#-model-comparison)
+- [Quick Start (5 min)](#-quick-start)
 - [Hardware Requirements](#-hardware-requirements)
+
+### 🔧 Infrastructure
+- [Runner Comparison](#-runner-comparison) - Ollama vs llama.cpp vs vLLM
+- [Model Selection](#-model-comparison)
 - [IDE Integration](#-ide-integration)
+- [Alternative Tools](#-alternative-tools) - LM Studio, Tabby
+
+### 🤖 Advanced Workflows (NEW)
+- [Agentic Coding](#-agentic-coding-new) - Autonomous bug fixing
+- [Guardrails & TDD](#️-guardrails--coding-plans) - Prevent hallucinations
+- [Prompt Engineering](#-prompt-engineering) - Better local prompts
+- [Real-World Workflows](#-real-world-workflows)
+
+### ⚠️ Troubleshooting
+- [Gotchas & Common Mistakes](#️-gotchas)
 - [Optimization Guide](#-optimization-guide)
-- [Troubleshooting](#-troubleshooting)
 - [Cost Analysis](#-cost-analysis)
+
+</details>
 
 ---
 
 ## 🎯 Why Local AI?
 
 | Cloud AI | Local AI |
-|:---------|:---------|
-| ❌ $200-500/month API costs | ✅ $0/month after hardware |
-| ❌ Your code sent to servers | ✅ 100% private |
-| ❌ Network latency | ✅ Instant response |
-| ❌ Rate limits | ✅ Unlimited usage |
-| ❌ Requires internet | ✅ Works offline |
+|:---------|:---------:|
+| ❌ $200-500/month API costs | ✅ **$0/month** after hardware |
+| ❌ Your code sent to servers | ✅ **100% private** |
+| ❌ Network latency (~200-500ms) | ✅ **<50ms** response |
+| ❌ Rate limits | ✅ **Unlimited** usage |
+| ❌ Requires internet | ✅ **Works offline** |
 
-**2025 Reality:** Open-source models now match GPT-4o in coding tasks. The switch is no longer a compromise—it's an upgrade.
+> **2026 Reality**: Qwen2.5-Coder-32B scores **92.7% on HumanEval**, matching GPT-4o. The switch is no longer a compromise—it's an upgrade.
+
+### The Bandwidth Formula
+
+```
+Speed (t/s) ≈ Memory Bandwidth (GB/s) / Model Size (GB)
+
+Example: RTX 4090 (1008 GB/s) + Qwen 32B Q4 (18GB)
+         ≈ 1008 / 18 = 56 t/s ✓
+```
 
 ---
 
@@ -49,11 +89,10 @@
 # macOS / Linux
 curl -fsSL https://ollama.com/install.sh | sh
 
-# Windows
-# Download from https://ollama.com/download
+# Windows - Download from https://ollama.com/download
 ```
 
-### Step 2: Download the Best Coding Model
+### Step 2: Download Coding Model
 
 ```bash
 # For 24GB VRAM (RTX 3090/4090)
@@ -79,18 +118,15 @@ ollama run qwen2.5-coder:32b
 ### Step 4: Install Continue.dev (VS Code)
 
 1. Install [Continue extension](https://marketplace.visualstudio.com/items?itemName=Continue.continue)
-2. Open settings: `~/.continue/config.json`
-3. Configure:
+2. Configure `~/.continue/config.json`:
 
 ```json
 {
-  "models": [
-    {
-      "title": "Qwen 2.5 Coder 32B",
-      "provider": "ollama",
-      "model": "qwen2.5-coder:32b"
-    }
-  ],
+  "models": [{
+    "title": "Qwen 32B (Chat)",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:32b"
+  }],
   "tabAutocompleteModel": {
     "title": "Qwen 1.5B (Fast)",
     "provider": "ollama",
@@ -103,59 +139,208 @@ ollama run qwen2.5-coder:32b
 
 ---
 
+## 🔀 Runner Comparison
+
+> **vLLM is 19x faster than Ollama** under concurrent load (Red Hat benchmarks).
+
+| Runner | Throughput | Best For |
+|--------|:----------:|----------|
+| **Ollama** | ~41 TPS | Single dev, easy setup |
+| **llama.cpp** | ~44 TPS | CLI hackers, full control |
+| **vLLM** | **~793 TPS** | Team servers, CI/CD |
+| **SGLang** | ~47 TPS | DeepSeek, structured JSON |
+
+### Quick Decision
+
+```
+Single developer on desktop?
+├─ Want simplicity? → Ollama
+└─ Want control? → llama.cpp
+
+Running team server?
+├─ High throughput? → vLLM
+└─ JSON outputs? → SGLang
+```
+
+📖 **[Full Runner Comparison Guide →](guides/runner-comparison.md)**
+
+---
+
+## 🤖 Agentic Coding (NEW!)
+
+> **Reddit's #1 requested feature**: "Show me a real workflow, not just setup."
+
+### The Bug Fix Workflow (Aider + Ollama)
+
+```bash
+# Install Aider
+pip install aider-chat
+
+# Configure for Ollama
+cat > ~/.aider.conf.yml << 'EOF'
+model: ollama/qwen2.5-coder:32b
+openai-api-base: http://localhost:11434/v1
+openai-api-key: "ollama"
+EOF
+
+# Start fixing bugs!
+cd /your/project
+aider .
+```
+
+### Example Session
+
+```
+YOU: Tests test_user_login and test_user_logout are failing. Please:
+     1) Run `pytest tests/test_auth.py`
+     2) Read failing tests and source files
+     3) Explain the bug and create a plan
+     4) Apply minimal fix
+     5) Run tests until they pass
+
+AIDER: [Reads files, proposes fix, applies, runs tests, iterates...]
+
+YOU: git diff  # Review
+YOU: git commit -am "Fix auth bug"
+```
+
+### Continue.dev Agent Mode
+
+1. Open failing file in VS Code
+2. Open Continue → Select **Agent mode**
+3. Prompt with specific instructions
+4. Let Agent iterate with tools
+
+📖 **[Full Agentic Coding Guide →](guides/agentic-coding.md)**
+
+---
+
+## 🛡️ Guardrails & Coding Plans
+
+> **Prevent local models from hallucinating and breaking your code.**
+
+### Strategy 1: TDD as Feedback Loop
+
+```
+1. YOU write failing test
+2. AI implements code
+3. Test runs automatically
+4. If fail → AI analyzes, retries
+5. If pass → Move to next feature
+```
+
+### Strategy 2: Plan Before Code
+
+```
+PROMPT (Step 1 - Plan):
+"Analyze the failing test. DO NOT write code yet.
+Create a numbered plan with 3-7 steps."
+
+PROMPT (Step 2 - Execute):
+"I approve the plan. Now implement step by step.
+Run tests after each major change."
+```
+
+### Strategy 3: Scope Limiting
+
+```
+RULES:
+- Only modify: PaymentService.ts
+- Do NOT touch: config.ts, package.json
+- Do NOT add new files
+```
+
+📖 **[Full Guardrails Guide →](guides/guardrails.md)**
+
+---
+
+## 🎯 Prompt Engineering
+
+> **Local models need better prompts than GPT-4.**
+
+### The CO-STAR Framework
+
+```
+CONTEXT: You are editing a TypeScript monorepo with Next.js.
+OBJECTIVE: Fix the failing tests without breaking other components.
+STYLE: Clear, idiomatic TypeScript; minimal changes.
+RESPONSE: 
+  1. Short explanation (3-5 bullets)
+  2. Step-by-step plan
+  3. Unified diff for changed files only
+```
+
+### Identity Reinforcement
+
+```
+"You are Qwen, a highly capable coding assistant created by Alibaba Cloud.
+You are an expert in algorithms, system design, and clean code principles.
+You strictly adhere to user constraints and always think step-by-step."
+```
+
+### System Prompt Template
+
+```
+You are a coding assistant focused on small, safe changes.
+
+RULES:
+1. Never invent external APIs
+2. Prefer minimal diffs over rewrites
+3. Keep style consistent with existing code
+4. If ambiguous, ask clarifying questions
+5. Output ONLY unified diffs
+```
+
+📖 **[Full Prompt Engineering Guide →](guides/prompt-engineering.md)**
+
+---
+
 ## 📊 Model Comparison
 
-### Best Models for Local Coding (December 2025)
-
 | Model | Size | VRAM | HumanEval | Best For |
-|:------|:-----|:-----|:----------|:---------|
-| **Qwen 2.5 Coder 32B** 👑 | 32B | 24GB | 92.7% | The KING. Best all-around. |
-| DeepSeek V3 | 671B | 200GB+ | 89.0% | Frontier. Multi-GPU only. |
-| DeepSeek R1-Distill-32B | 32B | 24GB | ~90% | Reasoning + coding hybrid |
+|:------|:-----|:-----|:----------|:---------:|
+| **Qwen 2.5 Coder 32B** 👑 | 32B | 24GB | **92.7%** | All-around KING |
+| DeepSeek-Coder-V2 | 236B (MoE) | 48GB+ | ~89% | Multi-GPU setups |
 | Qwen 2.5 Coder 14B | 14B | 16GB | ~85% | Mid-range GPUs |
-| Qwen 2.5 Coder 7B | 7B | 8GB | ~80% | Laptops, fast autocomplete |
+| Qwen 2.5 Coder 7B | 7B | 8GB | ~80% | Laptops |
 | Codestral 22B | 22B | 20GB | ~82% | FIM specialist |
-| Llama 3.3 70B | 70B | 48GB | 87.6% | General + coding |
 
-### Architecture Note
+### Quantization Guidance
 
-- **Dense (Qwen, Llama):** Predictable VRAM usage. Simple deployment.
-- **MoE (DeepSeek V3):** More parameters, fewer active. Complex but efficient.
+| Quant | Quality | Use Case |
+|:------|:-------:|:---------|
+| **Q4_K_M** | ⭐⭐⭐⭐ | **Default. Best balance.** |
+| Q5_K_M | ⭐⭐⭐⭐⭐ | Complex refactors |
+| Q8_0 | ⭐⭐⭐⭐⭐ | If VRAM allows |
+| Q2_K | ⭐⭐ | ❌ **Avoid for coding** |
+
+> **Warning**: Don't go below Q4 for coding. Logic breaks at low precision.
 
 ---
 
 ## 💻 Hardware Requirements
 
-### VRAM Requirements (4-bit Quantization)
+### The Speed Formula
 
-| Model Size | Minimum | Recommended | GPU Examples |
-|:-----------|:--------|:------------|:-------------|
-| **7B** | 6 GB | 8 GB | RTX 3060, M1/M2/M3 8GB |
-| **14B** | 10 GB | 16 GB | RTX 4060 Ti 16GB |
-| **32B** | 18 GB | 24 GB | RTX 3090/4090, M-series 32GB+ |
-| **70B** | 40 GB | 48 GB | 2x 3090, Mac Studio 64GB |
+```
+Speed (t/s) ≈ Memory Bandwidth (GB/s) / Model Size (GB)
+```
 
-### NVIDIA GPUs (Speed King)
+| Hardware | Bandwidth | 32B Q4 Speed |
+|----------|:---------:|:------------:|
+| RTX 4090 (24GB) | 1008 GB/s | ~56 t/s |
+| RTX 3090 (24GB) | 936 GB/s | ~52 t/s |
+| M3 Max (96GB) | 400 GB/s | ~22 t/s |
+| RTX 4060 Ti (16GB) | 288 GB/s | N/A (won't fit) |
 
-| GPU | VRAM | Best Model | Speed |
-|:----|:-----|:-----------|:------|
-| RTX 3060 12GB | 12GB | Qwen 14B | ~30 t/s |
-| RTX 3080 10GB | 10GB | Qwen 7B | ~50 t/s |
-| **RTX 3090** | **24GB** | **Qwen 32B** | **~50 t/s** |
-| **RTX 4090** | **24GB** | **Qwen 32B** | **~100 t/s** |
-| 2x RTX 3090 | 48GB | Llama 70B | ~20 t/s |
+### Recommendations
 
-### Apple Silicon (Capacity King)
-
-| Mac | RAM | Best Model | Speed |
-|:----|:----|:-----------|:------|
-| M1/M2 8GB | 8GB | Qwen 7B | ~15 t/s |
-| M2 Pro 16GB | 16GB | Qwen 14B | ~20 t/s |
-| M3 Max 36GB | 36GB | Qwen 32B | ~20 t/s |
-| M3 Max 128GB | 128GB | Llama 70B | ~10 t/s |
-| Mac Studio 192GB | 192GB | DeepSeek V3 | ~5 t/s |
-
-> **Tip:** Apple Silicon is slower but can run HUGE models due to unified memory.
+| Persona | Hardware | Best Model | Speed |
+|---------|----------|------------|:-----:|
+| **Budget Learner** | RTX 3060 12GB | Qwen 7B | ~40 t/s |
+| **Pro Developer** | RTX 4090 24GB | Qwen 32B | ~56 t/s |
+| **AI Architect** | Mac Studio 128GB | Llama 70B | ~22 t/s |
+| **Home Lab** | Dual RTX 3090 | Llama 70B Q5 | ~35 t/s |
 
 ---
 
@@ -163,159 +348,190 @@ ollama run qwen2.5-coder:32b
 
 ### Continue.dev (Recommended)
 
-Works with: **VS Code**, **JetBrains**, **Cursor**
-
 ```json
-// ~/.continue/config.json
 {
-  "models": [
-    {
-      "title": "Qwen 32B (Chat)",
-      "provider": "ollama",
-      "model": "qwen2.5-coder:32b"
-    }
-  ],
+  "models": [{
+    "title": "Qwen 32B",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:32b"
+  }],
   "tabAutocompleteModel": {
-    "title": "Qwen 1.5B (Autocomplete)",
-    "provider": "ollama", 
-    "model": "qwen2.5-coder:1.5b-base"
+    "title": "StarCoder2 3B",
+    "provider": "ollama",
+    "model": "starcoder2:3b"
   }
 }
 ```
 
 ### Cursor (Local Mode)
 
-1. Settings → Models → OpenAI API Base URL
-2. Set to: `http://localhost:11434/v1`
-3. API Key: `ollama` (any string works)
-4. Select model: `qwen2.5-coder:32b`
-
-### Neovim (avante.nvim)
-
-```lua
--- lua/plugins/avante.lua
-require("avante").setup({
-  provider = "ollama",
-  ollama = {
-    model = "qwen2.5-coder:32b",
-  }
-})
 ```
+Settings → Models → OpenAI API Base URL
+→ http://localhost:11434/v1
+API Key: ollama
+Model: qwen2.5-coder:32b
+```
+
+### Aider (Terminal)
+
+```bash
+pip install aider-chat
+export OLLAMA_API_BASE=http://localhost:11434
+aider --model ollama/qwen2.5-coder:32b
+```
+
+---
+
+## 🖥️ Alternative Tools
+
+| Tool | Best For |
+|------|----------|
+| **[LM Studio](https://lmstudio.ai)** | Visual exploration, model comparison |
+| **[Tabby](https://tabby.tabbyml.com)** | Self-hosted autocomplete (<100ms) |
+| **[LocalAI](https://github.com/mudler/LocalAI)** | Kubernetes/DevOps, multi-model |
+| **[vLLM](https://docs.vllm.ai)** | Team servers, CI/CD pipelines |
+
+📖 **[Full Alternative Tools Guide →](guides/alternative-tools.md)**
+
+---
+
+## 🔄 Real-World Workflows
+
+### Workflow 1: Debug React Component
+
+```
+1. Open failing file + test in VS Code
+2. Continue Agent mode
+3. Prompt: "Avatar doesn't update after profile change..."
+4. Let agent read, test, fix, iterate
+5. Review diffs and commit
+```
+
+### Workflow 2: Add API Endpoint (TDD)
+
+```
+1. Write failing test first
+2. Aider: "Implement /api/users/{id} to pass the test"
+3. Agent implements, runs tests, iterates
+4. Review and commit
+```
+
+### Workflow 3: Refactor Legacy Code
+
+```
+1. Plan mode: "Create characterization tests"
+2. Agent mode: "Refactor to Python 3.12"
+3. Verify all tests pass
+4. Review and commit
+```
+
+📖 **[Full Workflows Guide →](guides/workflows.md)**
+
+---
+
+## ⚠️ Gotchas
+
+### Top 5 Mistakes
+
+| Mistake | Fix |
+|---------|-----|
+| **Expecting GPT-4 from 7B** | Use 32B for complex tasks |
+| **Dumping entire repo** | Limit to relevant files |
+| **Using Q2 quantization** | Stay ≥Q4 for coding |
+| **Long sessions** | Clear context regularly |
+| **No tests** | Always have verification |
+
+### Context Window Exhaustion
+
+```
+Symptoms:
+- Model repeats itself
+- Ignores instructions
+- Quality drops suddenly
+
+Fix:
+- /clear or restart session
+- Use RAG instead of stuffing
+- Summarize before continuing
+```
+
+📖 **[Full Gotchas Guide →](guides/gotchas.md)**
 
 ---
 
 ## ⚡ Optimization Guide
 
-### Increase Context Window
-
-```bash
-# Create custom model with 32k context
-cat << 'EOF' > Modelfile
-FROM qwen2.5-coder:32b
-PARAMETER num_ctx 32768
-SYSTEM "You are an expert coding assistant."
-EOF
-
-ollama create qwen32k -f Modelfile
-ollama run qwen32k
-```
-
 ### Keep Model in Memory
 
 ```bash
-# Prevent model unloading (default: 5 min timeout)
-export OLLAMA_KEEP_ALIVE=-1
+export OLLAMA_KEEP_ALIVE=-1  # Never unload
 ```
 
-### Quantization Levels
-
-| Level | Size Reduction | Quality | Use Case |
-|:------|:---------------|:--------|:---------|
-| **Q4_K_M** | ~75% | ⭐⭐⭐⭐ | **Default. Best balance.** |
-| Q5_K_M | ~70% | ⭐⭐⭐⭐⭐ | Premium quality |
-| Q8_0 | ~50% | ⭐⭐⭐⭐⭐ | If VRAM allows |
-| Q2_K | ~85% | ⭐⭐ | Avoid for coding |
-
-> **Warning:** Don't go below Q4 for coding. Logic breaks at low precision.
-
----
-
-## 🐛 Troubleshooting
-
-### Out of Memory (OOM)
+### Increase Context Window
 
 ```bash
-# Check what's loaded
-ollama ps
-
-# Reduce context window
-ollama run qwen2.5-coder:32b --ctx 8192
-
-# Try smaller model
-ollama run qwen2.5-coder:14b
-```
-
-### Slow Inference
-
-1. Check GPU offloading: `nvidia-smi` or `ollama ps`
-2. Ensure full GPU load (not CPU fallback)
-3. Close other GPU-heavy apps
-4. Use smaller model for faster response
-
-### Model Not Following Instructions
-
-- Use **Instruct** models for chat (e.g., `qwen2.5-coder:32b`)
-- Use **Base** models for autocomplete (e.g., `qwen2.5-coder:1.5b-base`)
-- Add system prompt in Modelfile
-
-### Mac VRAM Expansion (Advanced)
-
-```bash
-# Allocate more unified memory to GPU
-sudo sysctl iogpu.wired_limit_mb=32000
+cat << 'EOF' > Modelfile
+FROM qwen2.5-coder:32b
+PARAMETER num_ctx 32768
+EOF
+ollama create qwen32k -f Modelfile
 ```
 
 ---
 
 ## 💰 Cost Analysis
 
-### API vs Local Comparison
+| Factor | Cloud (GPT-4o) | Local (RTX 4090) |
+|--------|:--------------:|:----------------:|
+| Monthly Cost | $200-500 | **$0** |
+| Hardware | $0 | ~$1,800 one-time |
+| Break-even | - | **4-9 months** |
+| Privacy | ❌ | ✅ |
+| Offline | ❌ | ✅ |
 
-| Factor | OpenAI GPT-4o | Local (RTX 3090) |
-|:-------|:--------------|:-----------------|
-| Monthly API Cost | $200-500 | $0 |
-| Hardware Cost | $0 | ~$800 (used) |
-| Break-even | - | **2-4 months** |
-| Electricity | $0 | ~$10/month |
-| Privacy | ❌ Code sent to cloud | ✅ 100% local |
-
-### ROI Calculator
-
-```
-Monthly API Usage: $300
-RTX 3090 Cost: $800
-Break-even: 800 / 300 = 2.7 months
-
-After 1 year savings: $3,600 - $800 - $120 = $2,680
-```
-
-> **Insight:** If you already have a gaming PC or MacBook, local AI is essentially **free**.
+> **Insight**: If you already have a gaming PC, local AI is essentially **free**.
 
 ---
 
-## 🔗 Resources
+## 📈 Star History
 
-- [Ollama Documentation](https://docs.ollama.com/)
-- [Continue.dev Docs](https://docs.continue.dev/)
-- [Qwen 2.5 Coder on HuggingFace](https://huggingface.co/Qwen/Qwen2.5-Coder-32B-Instruct)
-- [r/LocalLLaMA](https://reddit.com/r/LocalLLaMA) - Best community
-- [LM Studio](https://lmstudio.ai/) - GUI alternative
+<a href="https://star-history.com/#murataslan1/local-ai-coding-guide&Date">
+ <picture>
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=murataslan1/local-ai-coding-guide&type=Date&theme=dark" />
+   <img alt="Star History" src="https://api.star-history.com/svg?repos=murataslan1/local-ai-coding-guide&type=Date" />
+ </picture>
+</a>
+
+---
+
+## 📚 Resources
+
+| Resource | Link |
+|----------|------|
+| 📖 Ollama Docs | [docs.ollama.com](https://docs.ollama.com) |
+| 🔧 Continue.dev | [docs.continue.dev](https://docs.continue.dev) |
+| 🤖 Aider | [aider.chat](https://aider.chat) |
+| 🦙 r/LocalLLaMA | [reddit.com/r/LocalLLaMA](https://reddit.com/r/LocalLLaMA) |
+| 🏷️ Qwen2.5-Coder | [Hugging Face](https://huggingface.co/Qwen/Qwen2.5-Coder-32B-Instruct) |
 
 ---
 
 ## 🤝 Contributing
 
-PRs welcome! Help us keep this guide updated as new models and tools are released.
+<div align="center">
+
+[![Contributors](https://contrib.rocks/image?repo=murataslan1/local-ai-coding-guide)](https://github.com/murataslan1/local-ai-coding-guide/graphs/contributors)
+
+</div>
+
+We welcome contributions! Help us keep this guide updated.
+
+| Type | Examples |
+|------|----------|
+| 🆕 Tips | Workflows, shortcuts, hidden features |
+| 🐛 Bug Reports | New issues, workarounds |
+| 📊 Benchmarks | Model comparisons, speed tests |
+| 🔧 Configs | Modelfiles, Continue configs |
 
 1. Fork this repo
 2. Add your changes
@@ -323,16 +539,19 @@ PRs welcome! Help us keep this guide updated as new models and tools are release
 
 ---
 
-## 📜 License
+## 💝 Support
 
-MIT License - Use freely, contribute back!
+<div align="center">
 
----
+[![Star](https://img.shields.io/badge/⭐_Star_This_Repo-yellow?style=for-the-badge)](https://github.com/murataslan1/local-ai-coding-guide)
+[![Share Twitter](https://img.shields.io/badge/Share_on_Twitter-1DA1F2?style=for-the-badge&logo=twitter&logoColor=white)](https://twitter.com/intent/tweet?text=Check%20out%20this%20local%20AI%20coding%20guide!&url=https://github.com/murataslan1/local-ai-coding-guide)
 
-<p align="center">
-  <b>⭐ Star this repo if it helped you!</b>
-  <br><br>
-  Made with ❤️ by <a href="https://github.com/murataslan1">Murat Aslan</a>
-  <br>
-  Last updated: December 2025
-</p>
+**⭐ Star this repo if it helped you!**
+
+Made with ❤️ by [Murat Aslan](https://github.com/murataslan1)
+
+[![Follow](https://img.shields.io/github/followers/murataslan1?label=Follow&style=social)](https://github.com/murataslan1)
+
+*Last updated: January 2026*
+
+</div>
