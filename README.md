@@ -21,7 +21,7 @@
 
 **⚡ Quick Links:**
 
-[🚀 Quick Start](#-quick-start) · [🤖 Agentic Coding](#-agentic-coding-new) · [🔀 Runners](#-runner-comparison) · [🛡️ Guardrails](#️-guardrails--coding-plans) · [🎯 Prompts](#-prompt-engineering) · [⚠️ Gotchas](#️-gotchas)
+[🚀 Quick Start](#-quick-start) · [🤖 Agentic Coding](#-agentic-coding-new) · [🔀 Runners](#-runner-comparison) · [🛡️ Guardrails](#️-guardrails--coding-plans) · [🎯 Prompts](#-prompt-engineering) · [🗣️ Community](#-community-experiences) · [⚠️ Gotchas](#️-gotchas)
 
 </div>
 
@@ -48,6 +48,7 @@
 - [Guardrails & TDD](#️-guardrails--coding-plans) - Prevent hallucinations
 - [Prompt Engineering](#-prompt-engineering) - Better local prompts
 - [Real-World Workflows](#-real-world-workflows)
+- [Community Experiences](#-community-experiences) - Reddit/HN insights
 
 ### ⚠️ Troubleshooting
 - [Gotchas & Common Mistakes](#️-gotchas)
