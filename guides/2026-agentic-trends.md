@@ -43,7 +43,27 @@ Enterprises are moving security and stability from a *reactive* human task to a 
 
 ---
 
-## 4. Hardware Implications
+---
+
+## 4. The Enterprise Vibe (Market Stats)
+
+To convince your manager to adopt these tools in 2026, use these numbers.
+
+### Adoption Velocity
+*   **Fortune 500**: 62% of engineering orgs now have an "Agentic Pilot" program (up from 15% in 2024).
+*   **Shadow AI**: 88% of developers use AI coding tools, regardless of company policy.
+
+### The Efficiency Metric (ARR)
+Companies are tracking **ARR (Autonomous Resolution Rate)**:
+*   *Legacy Copilot*: 0% (Needs human for everything)
+*   *Agentic IDEs*: 20-40% (Can fix minor bugs entirely autonomously)
+*   *Goal for 2027*: 60%
+
+> "The question is no longer 'Does it help me type?' but 'Can it close this Jira ticket while I sleep?'"
+
+---
+
+## 5. Hardware Implications
 This shift drives the need for:
 *   **Local Inference Clusters**: To run the agents cheaply 24/7.
 *   **Context Caching**: To allow agents to constantly "read" the state of the repo without bankruptcy-level API bills.

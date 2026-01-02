@@ -222,6 +222,29 @@ npm test
 
 ---
 
+---
+
+### 11. The Visual Editor Infinite Loop (Composer Bug)
+
+**The Critical Bug**: In Agentic IDEs (Cursor/Composer), if you ask the agent to "fix the lint errors" while the agent is *also* running a file watcher or auto-linter in the terminal.
+
+**The Loop**:
+1. Agent edits file to fix lint.
+2. File watcher sees edit, runs linter.
+3. Linter incorrectly flags incomplete edit.
+4. Agent sees new error, tries to fix it again immediately.
+5. **Result**: Infinite edit-save-fail loop until IDE crashes.
+
+**Fix**:
+```bash
+# WORKAROUND:
+# 1. Kill all running terminals before large refactors.
+# 2. Use "pre-commit" hooks rather than live watchers.
+# 3. If stuck: fast-close the pane or use "Emergency Stop" shortcut.
+```
+
+---
+
 ## Environment-Specific Gotchas
 
 ### macOS

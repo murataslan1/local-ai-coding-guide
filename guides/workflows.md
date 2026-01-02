@@ -314,6 +314,50 @@ VERDICT: Request changes before merge.
 
 ---
 
+---
+
+## Workflow 5: The Debug Protocol (When Stuck)
+
+**Scenario**: The agent is spinning in circles, fixing one bug but creating another.
+
+### The "Reset & Isolate" Strategy
+
+**1. The STOP Command**
+Abruptly stop the current generation. Do not let it finish a bad thought.
+
+**2. The Context Wipe**
+```bash
+/clear
+```
+
+**3. The Minimal Reproduction**
+Create a new file `repro_bug.py` that isolates *only* the failing logic. No dependencies, no framework code.
+
+```python
+# repro_bug.py
+# If this script fails, we found the core issue.
+def broken_logic():
+    ...
+```
+
+**4. The "Rubber Duck" Prompt (DeepSeek R1)**
+Switch to your strongest reasoning model.
+
+```
+I am stuck on a logic bug.
+Here is the isolated reproduction code: [repro_bug.py]
+Here is the error: [error log]
+
+Please perform a root cause analysis.
+Do not write code yet. just Explain *why* it is failing.
+Think step-by-step.
+```
+
+**5. The Zero-Shot Fix**
+Once the reasoning model explains it, switch back to the coding model (Qwen/Claude) to apply the fix to the main codebase.
+
+---
+
 ## Realistic Expectations
 
 ### Local Models Excel At (~70% of tasks)
