@@ -1,163 +1,64 @@
-# Google Gemini 2.0 Flash: Speed, Context & Cost Guide
+# Google Gemini 2.0 Flash: The Infinite Context
 
-> **Last Updated**: January 2, 2026
+> **Status**: Verified for Jan 2026
+> **Role**: Long-term Memory / Context Provider
+> **Key Feature**: Native Context Caching
 
-Gemini 2.0 Flash has become the "workhorse" model for 2026—extremely fast, cheap, and with a massive 1M token context window.
+## 1. Overview
+While local models like DeepSeek provide privacy and "active reasoning," they are physically limited by VRAM. Google's Gemini 2.0 Flash solves this by offering an effectively **"Infinite Context"** window (1 Million Tokens default) with a revolutionary pricing model based on **Context Caching**.
 
-## 💰 Pricing Structure
-
-| Component | Rate | Notes |
-|-----------|------|-------|
-| **Input tokens** | $0.10 / 1M | Standard processing |
-| **Output tokens** | $0.40 / 1M | 4x input rate |
-| **Cache storage** | $1.00 / 1M tokens/hr | Time-based rental |
-| **Cached input** | $0.025 / 1M | **75% discount** |
-
-### Cost Comparison: With vs Without Caching
-
-**Scenario**: 500K token codebase, 20 queries in 2-hour session
-
-| Method | Calculation | Total Cost |
-|--------|-------------|------------|
-| **Without Cache** | (500K × 20) × $0.10/1M | **$1.00** |
-| **With Cache** | $0.05 (initial) + $1.00 (storage) + $0.25 (queries) | **$1.30** |
-
-> **When Caching Wins**: Sessions >3 queries on same context, context >100K tokens
+In the "Hybrid Stack" of 2026, Gemini 2.0 Flash acts as the repository-aware "Librarian" that feeds relevant excerpts to the local "Architect" (DeepSeek).
 
 ---
 
-## 🚀 Key Capabilities
+## 2. The Economics of Context Caching
+Traditionally, sending a 500k-token codebase to an LLM for every question was cost-prohibitive. Gemini 2.0 Flash changes this:
 
-### Context Window: 1 Million Tokens
+1.  **Upload Once**: You upload your repo state (context).
+2.  **Cache It**: Google caches these tokens.
+3.  **Query Cheaply**: Subsequent queries only pay for the new question tokens + a fraction of the cached token cost.
 
-Equivalent to:
-- 📝 50,000 lines of code
-- 📚 8 average-length novels
-- 📄 1,500 pages of documentation
+### 2026 Pricing (Estimates)
+| Feature | Price (per 1M tokens) |
+| :--- | :--- |
+| **Input (Uncached)** | $0.10 |
+| **Cache Read** | ~$0.025 (**75% Discount**) |
+| **Cache Storage** | ~$1.00 / hour |
 
-### Performance Reality
-
-| Context Size | Performance |
-|--------------|-------------|
-| <100K tokens | ✅ Excellent retrieval |
-| 100K-500K tokens | ✅ Reliable for structured code |
-| >500K tokens | ⚠️ Hallucinations increase |
-
-> **Recommendation**: Partition large codebases into 200-400K token chunks by module.
+> [!NOTE]
+> **Implicit Caching**: Enabled by default. If your system prompt or file context matches a recent request, you get the discount automatically without manual management.
 
 ---
 
-## 📊 Gemini 2.0 vs 2.5 Flash
+## 3. Integration Strategy: The Hybrid Stack
+This setup minimizes costs while maximizing intelligence.
 
-| Feature | 2.0 Flash | 2.5 Flash |
-|---------|-----------|-----------|
-| Input Cost | $0.10/1M | $0.15/1M (+50%) |
-| Output Cost | $0.40/1M | $0.60/1M (+50%) |
-| Max Output | 8,192 tokens | **65,000 tokens** |
-| Reasoning Mode | ❌ | ✅ Optional |
-| EOL Date | **Feb 2026** | Active |
+*   **Role 1: The Librarian (Gemini 2.0 Flash)**
+    *   **Task**: "Find all files related to User Authentication and summarize the login flow."
+    *   **Context**: Entire Repo (500k+ tokens).
+    *   **Output**: A concise summary + file references.
 
-> ⚠️ **Migrate to 2.5 Flash before February 2026!**
+*   **Role 2: The Architect (DeepSeek-R1-Local)**
+    *   **Task**: "Using this summary, refactor the login flow to use OAuth2."
+    *   **Context**: The specific 5-10 files identified by Gemini.
+    *   **Privacy**: High (Code logic stays local; only structure was analyzed by cloud).
 
 ---
 
-## ⚙️ IDE Configuration
+## 4. Configuration Tips
 
-### Continue.dev
+### For Continue.dev
+Use Gemini as a tab for "Repo Chat" but keep DeepSeek for "Edit Selection".
 
 ```json
 {
-  "models": [
-    {
-      "title": "Gemini 2.0 Flash",
-      "provider": "gemini",
-      "model": "gemini-2.0-flash-exp",
-      "apiKey": "<YOUR_API_KEY>",
-      "contextLength": 1048576,
-      "completionOptions": {
-        "maxTokens": 8192
-      }
-    }
-  ]
+  "title": "Gemini 2.0 Flash (Context)",
+  "provider": "gemini",
+  "model": "gemini-2.0-flash",
+  "apiKey": "<YOUR_KEY>",
+  "contextLength": 1000000
 }
 ```
 
-### Hybrid Stack (Recommended)
-
-```json
-{
-  "models": [
-    {
-      "title": "DeepSeek R1 (Reasoning)",
-      "provider": "ollama",
-      "model": "deepseek-r1:32b",
-      "apiBase": "http://localhost:11434"
-    },
-    {
-      "title": "Gemini 2.0 Flash (Context)",
-      "provider": "gemini",
-      "model": "gemini-2.0-flash",
-      "apiKey": "<GEMINI_API_KEY>",
-      "contextLength": 1000000
-    }
-  ],
-  "tabAutocompleteModel": {
-    "provider": "ollama",
-    "model": "deepseek-r1:7b"
-  }
-}
-```
-
-### Strategy
-
-| Task | Model |
-|------|-------|
-| **Reasoning/Logic** | DeepSeek R1 (local) |
-| **Large Context Search** | Gemini 2.0 Flash |
-| **Autocomplete** | Local 7B model |
-
----
-
-## 🔧 Context Caching Best Practices
-
-### Enable Implicit Caching
-
-Enabled by default. If prompt prefix matches recent prompt, cache hits automatically.
-
-### Explicit Caching (API)
-
-For custom agents with long sessions:
-
-```python
-import google.generativeai as genai
-
-# Create cache with TTL
-cache = genai.caching.CachedContent.create(
-    model="gemini-2.0-flash",
-    contents=[codebase_content],
-    ttl="7200s"  # 2 hours
-)
-
-# Use cached context
-model = genai.GenerativeModel.from_cached_content(cache)
-response = model.generate_content("Explain the auth module")
-```
-
----
-
-## 🎯 When to Use Gemini Flash
-
-| ✅ Use For | ❌ Avoid For |
-|------------|--------------|
-| Codebase-wide search | Complex algorithmic logic |
-| Documentation Q&A | Multi-step reasoning |
-| File content summarization | Security-critical code review |
-| Large context grounding | Privacy-sensitive codebases |
-
----
-
-## 📚 Resources
-
-- [Google AI Pricing](https://ai.google.dev/gemini-api/docs/pricing)
-- [Context Caching Docs](https://ai.google.dev/gemini-api/docs/caching)
-- [Gemini API Quickstart](https://ai.google.dev/gemini-api/docs/quickstart)
+### For CI/CD
+In "Corporate Immune Systems," Gemini 2.0 Flash parses the massive logs (MBs of text) from failed builds to pinpoint the error line, which is then passed to a local agent for fixing.

@@ -1,0 +1,27 @@
+{
+    "models": [
+        {
+            "title": "DeepSeek-R1 (Reasoning)",
+            "provider": "openai",
+            "model": "deepseek-reasoner",
+            "apiKey": "<DEEPSEEK_API_KEY>",
+            "apiBase": "https://api.deepseek.com",
+            "contextLength": 128000,
+            "systemMessage": "You are an expert AI coding assistant. Prioritize clean, efficient code."
+        },
+        {
+            "title": "Gemini 2.0 Flash (Context)",
+            "provider": "gemini",
+            "model": "gemini-2.0-flash",
+            "apiKey": "<GEMINI_API_KEY>",
+            "contextLength": 1000000
+        }
+    ],
+    "tabAutocompleteModel": {
+        "title": "Local Autocomplete",
+        "provider": "ollama",
+        "model": "deepseek-r1:7b",
+        "apiBase": "http://localhost:11434"
+    },
+    "allowAnonymousTelemetry": false
+}

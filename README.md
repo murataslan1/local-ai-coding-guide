@@ -38,10 +38,10 @@
 - [Hardware Requirements](#-hardware-requirements)
 
 ### 🔥 Hot Topics (January 2026) - NEW!
-- [**DeepSeek V3 + R1 Guide**](guides/deepseek-v3-r1-guide.md) - The open-source king 👑
+- [**DeepSeek V3 + R1 Guide**](guides/deepseek-v3-guide.md) - The open-source king 👑
 - [**Gemini 2.0 Flash Guide**](guides/gemini-2-flash-guide.md) - Speed & context economics
 - [**Holiday Freeze Protocol**](guides/holiday-freeze-protocol.md) - Enterprise survival guide
-- [**2026 AI Coding Predictions**](guides/2026-predictions.md) - Agents, Self-Healing, Hardware
+- [**2026 Agentic Trends**](guides/2026-agentic-trends.md) - Vibe coding & corporate immune systems
 
 ### 🔧 Infrastructure
 - [Runner Comparison](#-runner-comparison) - Ollama vs llama.cpp vs vLLM
