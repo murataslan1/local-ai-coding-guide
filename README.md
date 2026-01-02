@@ -37,6 +37,12 @@
 - [Quick Start (5 min)](#-quick-start)
 - [Hardware Requirements](#-hardware-requirements)
 
+### 🔥 Hot Topics (January 2026) - NEW!
+- [**DeepSeek V3 + R1 Guide**](guides/deepseek-v3-r1-guide.md) - The open-source king 👑
+- [**Gemini 2.0 Flash Guide**](guides/gemini-2-flash-guide.md) - Speed & context economics
+- [**Holiday Freeze Protocol**](guides/holiday-freeze-protocol.md) - Enterprise survival guide
+- [**2026 AI Coding Predictions**](guides/2026-predictions.md) - Agents, Self-Healing, Hardware
+
 ### 🔧 Infrastructure
 - [Runner Comparison](#-runner-comparison) - Ollama vs llama.cpp vs vLLM
 - [Model Selection](#-model-comparison)
